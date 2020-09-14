@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="=en">
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static "css/detail.css" %}" />
+	<meta charset="utf-8">
+	<title>{% block title %}Мой сайт{% endblock %}</title>
+</head>
+<body>
+
+	{% block container %}
+
+ <section class="container">
+    <nav>
+      <ul class="nav">
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'article:post_list' %}?next={{request.path}}" class="nav-icon" title="Главная"><span class="icon-home">Главная</span></a></li>
+          <li><a href="{% url 'admin:index'%}?next={{request.path}}" title="Админ панель">Админ панель</a></li>
+          <li><a href="{% url 'logout'%}?next={{request.path}}" title="Выйти">Выйти</a></li>
+          <li><a href="">Пользователь:{{ request.user.username }}</li>
+        {% else %}
+        <li><a href="{% url 'login'%}?next={{request.path}}" title="Войти">Войти</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </section>
+
+	{% endblock %}
+
+	{% block content %}
+
+	{% endblock %}
+
+</body>
+</html>
